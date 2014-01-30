@@ -1,0 +1,30 @@
+{
+    "name": "news/api-client",
+    "description": "A PHP library for connecting to the News API",
+    "type": "library",
+    "license": "proprietary",
+    "keywords": [
+        "news",
+        "api",
+        "client"
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "guzzle/guzzle": "~3.7"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "homepage": "http://www.news.com.au",
+    "authors": [
+        {
+            "name": "Daniel Lee",
+            "email": "daniel.lee@news.com.au"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "news": "src/"
+        }
+    }
+}
