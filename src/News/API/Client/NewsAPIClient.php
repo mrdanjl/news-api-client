@@ -100,10 +100,33 @@ class NewsAPIClient extends Client
      * getApiKey function.
      * 
      * @access public
-     * @return void
+     * @return string
      */
     public function getApiKey()
     {
         return $config->get('apiKey');
+    }
+    
+    /**
+     * setVersion function.
+     * 
+     * @access public
+     * @param mixed $version (default: null)
+     * @return void
+     */
+    public function setVersion($version = null) 
+    {
+        $config->set('version', $version);
+    }
+    
+    /**
+     * getVersion function.
+     * 
+     * @access public
+     * @return mixed
+     */
+    public function getVersion()
+    {
+        return $config->get('version');
     }
 }
