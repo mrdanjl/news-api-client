@@ -14,14 +14,8 @@ return array(
             'httpMethod' => 'GET',
             'uri'        => '/content/{version}/',
             'summary'    => 'Retrieve a list of content items sorted by most recent first.',
-            
+
             'parameters' => array(
-                'version' => array(
-                    'location'    => 'uri',
-                    'description' => 'The current version of the API.',
-                    'type'        => 'string',
-                    'required'    => true,
-                ),
                 'apiKey' => array(
                     'location'    => 'query',
                     'description' => 'The API key used.',
@@ -180,12 +174,6 @@ return array(
             'summary'    => 'Retrieve a single content item by ID or Origin ID.',
             
             'parameters' => array(
-                'version' => array(
-                    'location'    => 'uri',
-                    'description' => 'The current version of the API.',
-                    'type'        => 'string',
-                    'required'    => true,
-                ),
                 'apiKey' => array(
                     'location'    => 'query',
                     'description' => 'The API key used.',
@@ -217,6 +205,113 @@ return array(
             )
         ),
         
-    ),
-    
+        'getCategoryList' => array(
+            'httpMethod' => 'GET',
+            'uri'        => '/category/{version}/list/',
+            'summary'    => 'Retrieve a list of categories using a RESTful path structure.',
+            
+            'parameters' => array(
+                'apiKey' => array(
+                    'location'    => 'query',
+                    'description' => 'The API key used.',
+                    'type'        => 'string',
+                    'sentAs'      => 'api_key',
+                    'required'    => true
+                ),
+                'include' => array(
+                    'location'    => 'query',
+                    'description' => 'The level of sub-child detail to return.',
+                    'type'        => 'string',
+                    'pattern'     => '/^(none|children|all)$/',
+                    'required'    => false
+                ),
+                'mode' => array(
+                    'location'    => 'query',
+                    'description' => 'Return the child categories as either a flat list, or in a tree format with nested children.',
+                    'type'        => 'string',
+                    'pattern'     => '/^(flat|tree)$/',
+                    'required'    => false
+                ),
+                'pageSize' => array(
+                    'location'    => 'query',
+                    'description' => 'The number of content items to return in a single request.',
+                    'type'        => 'integer',
+                    'default'     => 20,
+                    'required'    => false
+                ),
+                'offset' => array(
+                    'location'    => 'query',
+                    'description' => 'The item offset to apply when returning search results for pagination. The index is zero based, so with a pageSize of 20, the second page of results would have an index of 20, and the third page would have an index of 40.',
+                    'type'        => 'integer',
+                    'default'     => 0,
+                    'required'    => false
+                )
+            )
+        ),
+
+        'getCategoryById' => array(
+            'httpMethod' => 'GET',
+            'uri'        => '/category/{version}/{id}',
+            'summary'    => 'Retrieve a single category item by ID. A category item contains the path, the id, and the parent id.',
+            
+            'parameters' => array(
+                'apiKey' => array(
+                    'location'    => 'query',
+                    'description' => 'The API key used.',
+                    'type'        => 'string',
+                    'sentAs'      => 'api_key',
+                    'required'    => true
+                ),
+                'id' => array(
+                    'location'    => 'uri',
+                    'description' => 'The ID of the category item.',
+                    'type'        => 'string',
+                    'required'    => true
+                )
+            )
+        ),
+        
+        /* News - Config API */
+        'getConfig' => array(
+            'httpMethod' => 'GET',
+            'uri'        => '/config/conf/',
+            'summary'    => 'Retrieve a single config item by appBundleId and appVersion.',
+            
+            'parameters' => array(
+                'apiKey' => array(
+                    'location'    => 'query',
+                    'description' => 'The API key used.',
+                    'type'        => 'string',
+                    'sentAs'      => 'api_key',
+                    'required'    => true
+                ),
+                'appBundleId' => array(
+                    'location'    => 'uri',
+                    'description' => 'Specifies the application bundle id.',
+                    'type'        => 'string',
+                    'required'    => true
+                ),
+                'appVersion' => array(
+                    'location'    => 'uri',
+                    'description' => 'Specified the application version.',
+                    'type'        => 'string',
+                    'required'    => true
+                ),
+                'appPart' => array(
+                    'location'    => 'uri',
+                    'description' => 'Specified the application part.',
+                    'type'        => 'string',
+                    'required'    => false
+                ),
+            )
+        ),
+        
+        /* News - Image API */
+        
+        /* News - Person API */
+        
+        /* News - Preferences API */
+        
+                
+    )
 );

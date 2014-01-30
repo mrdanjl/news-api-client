@@ -66,12 +66,44 @@ class NewsAPIClient extends Client
         // create client
         $client = new self($config->get('baseUrl'), $config);
         
+        // expose the api key for the service description
+        $config->set('command.params', array(
+            'apiKey' => $config->get('apiKey')
+        ));
+        
         // set the service description
-        $file = str_replace('{version}', $config->get('version'));
+        $file = str_replace('{version}', $config->get('version'), self::$serviceDescriptionFile);
         $file = __DIR__ . "/Resources/$file";
         
         $client->setDescription(ServiceDescription::factory($file));
         
         return $client;
+    }
+    
+    /**
+     * setApiKey function.
+     * 
+     * @access public
+     * @param string $apiKey (default: '')
+     * @return void
+     */
+    public function setApiKey($apiKey = '')
+    {
+        $config->set('apiKey', $apiKey);
+        
+        $config->set('command.params', array(
+            'apiKey' => $config->get('apiKey')
+        ));
+    }
+    
+    /**
+     * getApiKey function.
+     * 
+     * @access public
+     * @return void
+     */
+    public function getApiKey()
+    {
+        return $config->get('apiKey');
     }
 }
