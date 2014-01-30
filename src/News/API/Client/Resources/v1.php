@@ -9,7 +9,6 @@ return array(
     'operations'  => array(
     
         /* News - Content API */
-        
         'getContent' => array(
             'httpMethod' => 'GET',
             'uri'        => '/content/{version}/',
@@ -286,19 +285,19 @@ return array(
                     'required'    => true
                 ),
                 'appBundleId' => array(
-                    'location'    => 'uri',
+                    'location'    => 'query',
                     'description' => 'Specifies the application bundle id.',
                     'type'        => 'string',
                     'required'    => true
                 ),
                 'appVersion' => array(
-                    'location'    => 'uri',
+                    'location'    => 'query',
                     'description' => 'Specified the application version.',
                     'type'        => 'string',
                     'required'    => true
                 ),
                 'appPart' => array(
-                    'location'    => 'uri',
+                    'location'    => 'query',
                     'description' => 'Specified the application part.',
                     'type'        => 'string',
                     'required'    => false
@@ -307,9 +306,170 @@ return array(
         ),
         
         /* News - Image API */
+        'getImage' => array(
+            'httpMethod' => 'GET',
+            'uri'        => '/image/{version}/{id}',
+            'summary'    => 'Retrieve (and optionally resize and crop) a Fatwire image crop. Images will be cropped if the specified dimensions do not match the original aspect ratio. Images can not be stretched, and will not be upscaled past their original size.',
+            
+            'parameters' => array(
+                'apiKey' => array(
+                    'location'    => 'query',
+                    'description' => 'The API key used.',
+                    'type'        => 'string',
+                    'sentAs'      => 'api_key',
+                    'required'    => true
+                ),
+                'id' => array(
+                    'location'    => 'uri',
+                    'description' => 'The ContentAPI ID of the image crop to resize.',
+                    'type'        => 'string',
+                    'required'    => true
+                ),
+                'width' => array(
+                    'location'    => 'query',
+                    'description' => 'The required width (defaults to 640)',
+                    'type'        => 'string',
+                    'required'    => false
+                ),
+                'height' => array(
+                    'location'    => 'query',
+                    'description' => 'The required height',
+                    'type'        => 'string',
+                    'required'    => false
+                ),
+                'crop' => array(
+                    'location'    => 'query',
+                    'description' => 'The crop factor or ratio (used if width AND height are not supplied). E.g. 1:1, 4:3 or 1, 1.5 (defaults to the aspect ratio or the original image)',
+                    'type'        => 'string',
+                    'required'    => false
+                ),
+                'cropRule' => array(
+                    'location'    => 'query',
+                    'description' => 'The area where the crop should be anchored to: top, left, right, bottom, centre, topLeft, bottomRight etc. (defaults to centre)',
+                    'type'        => 'string',
+                    'required'    => false
+                ),
+                'original' => array(
+                    'location'    => 'query',
+                    'description' => 'If present, the original full sized source image is returned (overrides all other resize and crop parameters)',
+                    'type'        => 'string',
+                    'required'    => false
+                ),  
+            )
+        ),
+        
+        'getImageSourceOf' => array(
+            'httpMethod' => 'GET',
+            'uri'        => '/image/{version}/sourceof/{id}',
+            'summary'    => 'Retrieve (and optionally resize and crop) a Fatwire source image. Images will be cropped if the specified dimensions do not match the original aspect ratio. Images can not be stretched, and will not be upscaled past their original size.',
+            
+            'parameters' => array(
+                'apiKey' => array(
+                    'location'    => 'query',
+                    'description' => 'The API key used.',
+                    'type'        => 'string',
+                    'sentAs'      => 'api_key',
+                    'required'    => true
+                ),
+                'id' => array(
+                    'location'    => 'uri',
+                    'description' => 'The ContentAPI ID of the image source to crop to resize.',
+                    'type'        => 'string',
+                    'required'    => true
+                ),
+                'width' => array(
+                    'location'    => 'query',
+                    'description' => 'The required width (defaults to 640)',
+                    'type'        => 'string',
+                    'required'    => false
+                ),
+                'height' => array(
+                    'location'    => 'query',
+                    'description' => 'The required height',
+                    'type'        => 'string',
+                    'required'    => false
+                ),
+                'crop' => array(
+                    'location'    => 'query',
+                    'description' => 'The crop factor or ratio (used if width AND height are not supplied). E.g. 1:1, 4:3 or 1, 1.5 (defaults to the aspect ratio or the original image)',
+                    'type'        => 'string',
+                    'required'    => false
+                ),
+                'cropRule' => array(
+                    'location'    => 'query',
+                    'description' => 'The area where the crop should be anchored to: top, left, right, bottom, centre, topLeft, bottomRight etc. (defaults to centre)',
+                    'type'        => 'string',
+                    'required'    => false
+                ),
+                'original' => array(
+                    'location'    => 'query',
+                    'description' => 'If present, the original full sized source image is returned (overrides all other resize and crop parameters)',
+                    'type'        => 'string',
+                    'required'    => false
+                ),  
+            )
+        ),
+        
+        'getImageExternal' => array(
+            'httpMethod' => 'GET',
+            'uri'        => '/image/{version}/external',
+            'summary'    => 'Retrieve (and optionally resize and crop) an externally hosted image. Images will be cropped if the specified dimensions do not match the original aspect ratio. Images can not be stretched, and will not be upscaled past their original size.',
+            
+            'parameters' => array(
+                'apiKey' => array(
+                    'location'    => 'query',
+                    'description' => 'The API key used.',
+                    'type'        => 'string',
+                    'sentAs'      => 'api_key',
+                    'required'    => true
+                ),
+                'url' => array(
+                    'location'    => 'query',
+                    'description' => 'The URL of the externally hosted image to resize.',
+                    'type'        => 'string',
+                    'required'    => true
+                ),
+                'width' => array(
+                    'location'    => 'query',
+                    'description' => 'The required width (defaults to 640)',
+                    'type'        => 'string',
+                    'required'    => false
+                ),
+                'height' => array(
+                    'location'    => 'query',
+                    'description' => 'The required height',
+                    'type'        => 'string',
+                    'required'    => false
+                ),
+                'crop' => array(
+                    'location'    => 'query',
+                    'description' => 'The crop factor or ratio (used if width AND height are not supplied). E.g. 1:1, 4:3 or 1, 1.5 (defaults to the aspect ratio or the original image)',
+                    'type'        => 'string',
+                    'required'    => false
+                ),
+                'cropRule' => array(
+                    'location'    => 'query',
+                    'description' => 'The area where the crop should be anchored to: top, left, right, bottom, centre, topLeft, bottomRight etc. (defaults to centre)',
+                    'type'        => 'string',
+                    'required'    => false
+                ),
+                'original' => array(
+                    'location'    => 'query',
+                    'description' => 'If present, the original full sized source image is returned (overrides all other resize and crop parameters)',
+                    'type'        => 'string',
+                    'required'    => false
+                ),  
+                'referer' => array(
+                    'location'    => 'query',
+                    'description' => 'The value of the HTTP Referer header to use when requesting the image from the external source. Some sites implement a policy whereby only browsers arriving from their web pages are served images.',
+                    'type'        => 'string',
+                    'required'    => false
+                ),  
+            )
+        ),
         
         /* News - Person API */
-        
+                
         /* News - Preferences API */
         
                 
