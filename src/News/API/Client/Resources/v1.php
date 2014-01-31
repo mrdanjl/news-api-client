@@ -130,7 +130,7 @@ return array(
                 'includeRelated' => array(
                     'location'    => 'query',
                     'description' => 'Sets whether or not to include related content items in the returned result set. You may wish to set this to false if you are concerned about bandwidth or to increase the speed of retrieval for a large amount of content items.',
-                    'type'        => 'string',
+                    'type'        => array('string', 'boolean'),
                     'pattern'     => '/^(true|false)$/',
                     'default'     => 'false',
                     'required'    => false
@@ -138,7 +138,7 @@ return array(
                 'includeBodies' => array(
                     'location'    => 'query',
                     'description' => 'Sets whether or not to include news story bodies is the results. Story bodies can be large, so not requesting them will improve performance and response times.',
-                    'type'        => 'string',
+                    'type'        => array('string', 'boolean'),
                     'pattern'     => '/^(true|false)$/',
                     'default'     => 'false',
                     'required'    => false
@@ -148,6 +148,12 @@ return array(
                     'description' => 'Defines the level of HTML formatting to include in returned attributes. You need to specify the mode (full) and the scope (body or all).',
                     'type'        => 'string',
                     'pattern'     => '/^(full\,all|full\,body)$/',
+                    'required'    => false
+                ),
+                'maxRelated' => array(
+                    'location'    => 'query',
+                    'description' => 'The number of related items to return',
+                    'type'        => 'integer',
                     'required'    => false
                 ),
                 'pageSize' => array(
